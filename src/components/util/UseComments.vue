@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue"
 import Comment from "../../class/Comment"
 
 const API_URL = import.meta.env.VITE_API_URL
+if (!API_URL) throw new Error("VITE_API_URL is not defined")
 
 const comments = ref<Comment[]>([])
 
@@ -13,7 +14,7 @@ onMounted(async () => {
 
   emit("update:comments", comments.value)
 
-  const socket = new WebSocket(`${API_URL || ""}/ws/comments`)
+  const socket = new WebSocket(`${API_URL}/ws/comments`)
   socket.onmessage = async ({ data }) => {
     comments.value = JSON.parse(await data.text()) as Comment[]
 
