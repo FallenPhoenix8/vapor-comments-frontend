@@ -12,6 +12,11 @@
 }
 
 @layer base {
+  :root.light-mode {
+    --color-bg-color: var(--color-slate-100);
+    --color-text: var(--color-black);
+  }
+
   *,
   *::before,
   *::after,
@@ -22,9 +27,8 @@
   }
 
   body {
-    @apply bg-bg-color p-1 text-text;
+    @apply bg-bg-color p-1 text-text text-xl transition-colors duration-300;
     font-family: Raleway, sans-serif;
-    @apply text-xl;
   }
 
   h1 {

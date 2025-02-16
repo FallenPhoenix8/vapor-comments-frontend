@@ -1,7 +1,12 @@
+<script setup lang="ts">
+const colorMode = useColorMode()
+
+watch(colorMode, (mode) => {
+  console.log("Color mode changed to:", mode.value)
+})
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    
-  </div>
+  <div>test</div>
   <NuxtPage />
 </template>
