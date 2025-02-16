@@ -14,6 +14,7 @@ const count = ref(0)
     <h1 v-if="count > 0">Hello world</h1>
   </Transition>
   <button @click="() => count++" class="block">Click me!</button>
+  <Button :onClick="() => count++">Click me</Button>
 </template>
 
 <style scoped>
