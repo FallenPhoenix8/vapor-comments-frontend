@@ -23,8 +23,8 @@
 
   body {
     @apply bg-bg-color p-1 text-text;
-    font-family: Atkinson Hyperlegible Next, sans-serif;
-    @apply text-lg;
+    font-family: Raleway, sans-serif;
+    @apply text-xl;
   }
 
   h1 {
@@ -36,7 +36,11 @@
   }
 
   h3 {
-    @apply text-xl;
+    @apply text-2xl;
+  }
+
+  a {
+    @apply underline underline-offset-4;
   }
 
   .btn {
