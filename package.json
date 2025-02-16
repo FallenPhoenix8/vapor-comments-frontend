@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/fonts": "0.10.3",
+    "@nuxt/icon": "1.10.3",
     "@nuxtjs/color-mode": "3.5.2",
     "@tailwindcss/vite": "^4.0.6",
     "motion": "^12.4.3",
