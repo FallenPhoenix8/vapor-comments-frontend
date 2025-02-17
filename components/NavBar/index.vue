@@ -1,3 +1,10 @@
+<script setup lang="ts">
+const user = await useUser()
+onMounted(() => {
+  console.log(user.value)
+})
+</script>
+
 <template>
   <nav
     class="fixed top-4 left-0 right-0 flex justify-between items-center px-5"
@@ -17,7 +24,9 @@
       <NavBarItem>Features</NavBarItem>
     </NavBarWrapper>
     <NavBarWrapper>
-      <NavBarItem :complementary="true">Register</NavBarItem>
+      <NavBarItem :complementary="true" v-if="!user?.authorized"
+        >Try it out!</NavBarItem
+      >
     </NavBarWrapper>
   </nav>
 </template>
