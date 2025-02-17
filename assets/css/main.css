@@ -5,16 +5,29 @@
   --color-primary-lighter: var(--color-indigo-700);
   --color-primary-darker: var(--color-indigo-900);
 
+  --color-complementary-lighter: var(--color-amber-400);
+  --color-complementary-darker: var(--color-amber-800);
+
   --color-bg-color: var(--color-slate-900);
   --color-text: var(--color-white);
+
+  --color-secondary: var(--color-zinc-500);
 
   --radius-base: var(--radius-md);
 }
 
 @layer base {
   :root.light-mode {
-    --color-bg-color: var(--color-slate-100);
+    --color-bg-color: var(--color-white);
     --color-text: var(--color-black);
+    --color-secondary: var(--color-zinc-50);
+
+    --color-primary: var(--color-indigo-500);
+    --color-primary-lighter: var(--color-indigo-400);
+    --color-primary-darker: var(--color-indigo-600);
+
+    --color-complementary-lighter: var(--color-amber-300);
+    --color-complementary-darker: var(--color-amber-700);
   }
 
   *,
@@ -22,12 +35,12 @@
   *::after,
   *:hover,
   *:focus {
-    transition: all 150ms ease-in-out;
+    transition: all 300ms ease-in-out;
     @apply outline-primary-lighter border-primary-lighter;
   }
 
   body {
-    @apply bg-bg-color p-1 text-text text-xl transition-colors duration-300;
+    @apply bg-bg-color p-1 text-text text-xl;
     font-family: Raleway, sans-serif;
   }
 
@@ -58,6 +71,24 @@
 
     &:focus {
       outline-width: 0;
+    }
+  }
+
+  .gradient-complementary {
+    @apply bg-gradient-to-br from-complementary-lighter to-complementary-darker;
+
+    &:hover,
+    &:focus {
+      @apply -hue-rotate-30;
+    }
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary-lighter to-primary-darker;
+
+    &:hover,
+    &:focus {
+      @apply -hue-rotate-30;
     }
   }
 }

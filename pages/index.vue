@@ -3,6 +3,7 @@ const route = useRoute()
 </script>
 
 <template>
+  <NavBar />
   <div>
     <h1 class="text-red-500">Nuxt Routing set up successfully!</h1>
     <p>
