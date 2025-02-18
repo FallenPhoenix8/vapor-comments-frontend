@@ -7,6 +7,6 @@ watch(colorMode, (mode) => {
 </script>
 
 <template>
-  <div>test</div>
+  <NavBar />
   <NuxtPage />
 </template>

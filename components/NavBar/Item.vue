@@ -5,17 +5,21 @@ const props = defineProps({
     required: false,
     default: () => "#",
   },
-  complementary: Boolean,
+
   isIcon: Boolean,
+  isPadding: {
+    type: Boolean,
+    required: false,
+    default: () => true,
+  },
 })
 </script>
 <template>
   <li
-    class="flex rounded-full hover:bg-primary-lighter dark:hover:bg-primary-darker has-focus:bg-primary-lighter dark:has-focus:bg-primary-darker justify-center items-center min-h-full px-2 py-1"
+    class="item flex rounded-full justify-center items-center min-h-full"
     :class="{
-      'gradient-complementary': complementary,
-      'hover:bg-transparent dark:hover:bg-transparent has-focus:bg-transparent dark:has-focus:bg-transparent':
-        isIcon,
+      'is-icon': isIcon,
+      'px-2 py-1': isPadding,
     }"
   >
     <a
@@ -28,4 +32,21 @@ const props = defineProps({
   </li>
 </template>
 
-<style scoped></style>
+<style scoped>
+.item {
+  &:hover,
+  &:has(:focus) {
+    background-color: var(--color-primary-lighter);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-primary-darker);
+    }
+  }
+}
+
+.item.is-icon {
+  background-color: transparent;
+  @media (prefers-color-scheme: dark) {
+    background-color: transparent;
+  }
+}
+</style>

@@ -1,32 +1,51 @@
 <script setup lang="ts">
+import { animate, stagger } from "motion"
 const user = await useUser()
+
 onMounted(() => {
-  console.log(user.value)
+  slideIn()
 })
+
+function slideIn() {
+  animate(
+    '[data-role="nav-wrapper"]',
+    {
+      marginTop: "calc(var(--spacing) * 4)",
+      opacity: 1,
+    },
+    {
+      delay: stagger(0.2),
+      duration: 0.3,
+      ease: "easeIn",
+    }
+  )
+}
 </script>
 
 <template>
-  <nav
-    class="fixed top-4 left-0 right-0 flex justify-between items-center px-5"
-  >
-    <NavBarWrapper>
-      <NavBarItem>Contact us</NavBarItem>
-    </NavBarWrapper>
-    <NavBarWrapper>
-      <NavBarItem>About</NavBarItem>
-      <NavBarItem :is-icon="true">
-        <Icon
-          name="mingcute:home-3-fill"
-          class="h-10 w-10 hover:text-primary group-hover:text-primary group-focus:text-primary dark:hover:text-primary-darker dark:group-hover:text-primary-darker dark:group-focus:text-primary-darker"
-          mode="svg"
-        />
-      </NavBarItem>
-      <NavBarItem>Features</NavBarItem>
-    </NavBarWrapper>
-    <NavBarWrapper>
-      <NavBarItem :complementary="true" v-if="!user?.authorized"
-        >Try it out!</NavBarItem
-      >
-    </NavBarWrapper>
-  </nav>
+  <Transition :css="false">
+    <nav
+      class="fixed left-0 right-0 bottom-5 md:bottom-auto flex justify-center md:justify-between items-center px-5"
+    >
+      <NavBarWrapper class="hidden lg:block">
+        <NavBarItem>Contact us</NavBarItem>
+      </NavBarWrapper>
+      <NavBarWrapper>
+        <NavBarItem>About</NavBarItem>
+        <NavBarItem :is-icon="true">
+          <Icon name="mingcute:home-3-fill" class="h-10 w-10" mode="svg" />
+        </NavBarItem>
+        <NavBarItem>Features</NavBarItem>
+      </NavBarWrapper>
+      <!-- <NavBarWrapper> -->
+      <!-- <NavBarItem
+        :complementary="true"
+        v-if="!user?.authorized"
+        :is-padding="false"
+      > -->
+      <NavBarTryItButton class="fixed right-1 top-1 md:static" />
+      <!-- </NavBarItem> -->
+      <!-- </NavBarWrapper> -->
+    </nav>
+  </Transition>
 </template>
