@@ -3,7 +3,7 @@
     <FeaturesWave />
     <h2 class="text-center">Why us?</h2>
     <div
-      class="features-wrapper flex flex-wrap justify-center gap-5 md:gap-10 mt-5"
+      class="features-wrapper flex flex-wrap justify-center gap-5 md:gap-10 mt-5 px-5"
     >
       <FeaturesCard>
         <template #icon>
