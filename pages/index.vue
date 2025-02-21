@@ -2,6 +2,7 @@
   <Hero />
   <Features />
   <Contact />
+  <Footer />
 </template>
 
 <style>
