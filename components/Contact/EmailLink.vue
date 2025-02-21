@@ -14,7 +14,7 @@ if (!isValidEmail(email) || !email) {
 </script>
 <template>
   <a
-    href="mailto:{{ email }}"
+    :href="`mailto:${email}`"
     target="_blank"
     class="no-underline rounded-base gradient primary p-2"
     >Send us an email!</a
