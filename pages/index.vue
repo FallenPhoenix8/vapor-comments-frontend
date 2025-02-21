@@ -1,10 +1,7 @@
-<script setup lang="ts">
-const route = useRoute()
-</script>
-
 <template>
   <Hero />
   <Features />
+  <Contact />
 </template>
 
 <style>

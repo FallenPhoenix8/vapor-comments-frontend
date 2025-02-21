@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     public: {
       // Will be available on both server and client
       apiUrl: process.env.API_URL,
+      contactEmail: process.env.CONTACT_EMAIL,
     },
   },
   compatibilityDate: "2024-11-01",
