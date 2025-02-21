@@ -41,8 +41,9 @@
     @apply outline-primary-lighter border-primary-lighter;
   }
 
-  body {
-    @apply bg-bg-color p-1 text-text text-xl;
+  body,
+  html {
+    @apply bg-bg-color text-text text-xl;
     font-family: Raleway, sans-serif;
   }
 
@@ -52,6 +53,11 @@
 
   h2 {
     @apply text-4xl;
+  }
+
+  h1,
+  h2 {
+    @apply font-bold;
   }
 
   h3 {
@@ -100,7 +106,7 @@
   }
 
   .iconify {
-    @apply hover:text-primary group-hover:text-primary group-focus:text-primary dark:hover:text-primary-darker dark:group-hover:text-primary-darker dark:group-focus:text-primary-darker;
+    @apply hover:text-primary group-hover:text-primary group-focus:text-primary dark:hover:text-primary-darker dark:group-hover:text-primary-darker dark:group-focus:text-primary-darker group-hover:scale-110 group-focus:scale-110 transition-all duration-200;
   }
 
   p {

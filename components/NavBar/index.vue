@@ -25,7 +25,7 @@ function slideIn() {
 <template>
   <Transition :css="false">
     <nav
-      class="fixed left-0 right-0 bottom-5 md:bottom-auto flex justify-center md:justify-between items-center px-5"
+      class="fixed left-0 right-0 bottom-5 md:bottom-auto flex justify-center md:justify-between items-center px-5 z-50"
     >
       <NavBarWrapper class="hidden lg:block">
         <NavBarItem>Contact us</NavBarItem>

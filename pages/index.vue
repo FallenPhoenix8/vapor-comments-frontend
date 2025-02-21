@@ -4,4 +4,11 @@ const route = useRoute()
 
 <template>
   <Hero />
+  <Features />
 </template>
+
+<style>
+body {
+  background-color: var(--color-secondary);
+}
+</style>

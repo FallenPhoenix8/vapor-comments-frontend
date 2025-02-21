@@ -1,6 +1,6 @@
 <template>
   <header
-    class="hero mt-10 flex lg:justify-between items-center xl:flex-row flex-col-reverse h-screen md:px-10 px-3 justify-center bg-contain bg-top bg-no-repeat"
+    class="hero pt-10 flex lg:justify-between items-center xl:flex-row flex-col-reverse h-screen md:px-10 px-3 justify-center bg-contain bg-top bg-no-repeat bg-bg-color"
   >
     <div
       class="content bg-bg-color/50 backdrop-blur-xs rounded-lg text-center lg:text-left"

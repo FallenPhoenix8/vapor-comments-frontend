@@ -10,7 +10,7 @@
 </template>
 
 <style scoped>
-.nav-bar-wrapper * {
+.nav-bar-wrapper *:not(.iconify) {
   transition-property: color, background-color, border-color, outline-color,
     text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via,
     filter, --tw-gradient-to;
