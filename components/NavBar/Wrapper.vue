@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="nav-bar-wrapper bg-secondary/90 rounded-full flex space-x-2"
+    class="nav-bar-wrapper bg-secondary-darker/50 rounded-full flex space-x-2"
     data-role="nav-wrapper"
     :class="$attrs.class"
     style="opacity: 0.5"

@@ -11,7 +11,9 @@
         </template>
         <template #title> Discuss interesting topics </template>
         <template #description>
-          Home for various interesting discussions.
+          Home for various interesting discussions. Engage in meaningful
+          conversations and explore diverse topics. Connect with others who
+          share your interests.
         </template>
       </FeaturesCard>
       <FeaturesCard>
@@ -24,7 +26,8 @@
         </template>
         <template #title> Meet new people </template>
         <template #description>
-          Meet new people and make new friends.
+          Meet new people and make new friends. Expand your network and build
+          lasting relationships.
         </template>
       </FeaturesCard>
       <FeaturesCard>
@@ -33,7 +36,9 @@
         </template>
         <template #title> Express yourself </template>
         <template #description>
-          Express yourself and share your thoughts.
+          Share your thoughts and express yourself freely. Whether it's through
+          writing, art, or any other form of expression, find your voice and let
+          it be heard.
         </template>
       </FeaturesCard>
     </div>

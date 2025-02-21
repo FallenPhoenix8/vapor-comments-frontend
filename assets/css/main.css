@@ -13,8 +13,9 @@
   --color-text: var(--color-white);
 
   --color-secondary: var(--color-zinc-500);
+  --color-secondary-darker: var(--color-zinc-700);
 
-  --radius-base: var(--radius-md);
+  --radius-base: var(--radius-lg);
 
   --animate-slide-from-bottom: slide-from-bottom 0.8s ease-in forwards;
 }
@@ -24,6 +25,7 @@
     --color-bg-color: var(--color-white);
     --color-text: var(--color-black);
     --color-secondary: var(--color-zinc-50);
+    --color-secondary-darker: var(--color-zinc-200);
 
     --color-complementary: var(--color-blue-500);
     --color-complementary-lighter: var(--color-blue-300);
