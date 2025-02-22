@@ -18,6 +18,8 @@
   --radius-base: var(--radius-lg);
 
   --animate-slide-from-bottom: slide-from-bottom 0.8s ease-in forwards;
+
+  --sun-moon-stroke-width: 6;
 }
 
 @layer base {

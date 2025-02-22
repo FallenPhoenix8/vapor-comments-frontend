@@ -27,13 +27,16 @@ function slideIn() {
     <nav
       class="fixed left-0 right-0 bottom-5 md:bottom-auto flex justify-center md:justify-between items-center px-5 z-50"
     >
-      <NavBarWrapper class="hidden lg:block">
-        <NavBarItem>Contact us</NavBarItem>
-      </NavBarWrapper>
+      <ColorModeToggle />
+
       <NavBarWrapper>
         <NavBarItem>About</NavBarItem>
         <NavBarItem :is-icon="true">
-          <Icon name="mingcute:home-3-fill" class="h-10 w-10" mode="svg" />
+          <Icon
+            name="mingcute:home-3-fill"
+            class="h-10 w-10 duration-150"
+            mode="svg"
+          />
         </NavBarItem>
         <NavBarItem>Features</NavBarItem>
       </NavBarWrapper>

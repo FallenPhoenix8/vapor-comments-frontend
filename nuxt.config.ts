@@ -9,6 +9,9 @@ export default defineNuxtConfig({
       contactEmail: process.env.CONTACT_EMAIL,
     },
   },
+  routeRules: {
+    "/app/**": { ssr: false },
+  },
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],

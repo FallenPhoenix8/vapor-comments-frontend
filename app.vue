@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 
-watch(colorMode, (mode) => {
-  console.log("Color mode changed to:", mode.value)
-})
+// onMounted(() => {
+//   colorMode.preference = localStorage.getItem("color-mode") || "system"
+// })
 </script>
 
 <template>
