@@ -128,14 +128,14 @@ function animateRays() {
 <template>
   <ClientOnly>
     <button
-      class="p-1 dark:bg-secondary/10 bg-secondary-darker rounded-2xl"
+      class="p-1 dark:bg-secondary/10 bg-secondary-darker rounded-base md:static fixed top-4 left-4 z-50 cursor-pointer"
       @click="changeColorMode"
     >
       <svg
         viewBox="0 0 476 476"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-10 h-10 stroke-[6]"
+        class="w-7 h-7 stroke-[6]"
         v-if="mounted"
         :alt="
           'Change to ' + colorMode.value === 'dark' ? 'Light mode' : 'Dark mode'
@@ -157,7 +157,7 @@ function animateRays() {
           />
         </Transition>
         <Transition :css="false">
-          <g class="sun-rays stroke-6 stroke-yellow-600" ref="sun-rays">
+          <g class="sun-rays stroke-[6] stroke-yellow-600" ref="sun-rays">
             <path d="M238 1.33333V48.6667" />
             <path d="M238 427.333V474.667" />
             <path d="M70.6767 70.6767L104.047 104.047" />

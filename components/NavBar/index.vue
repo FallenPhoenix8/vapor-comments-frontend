@@ -32,11 +32,9 @@ function slideIn() {
       <NavBarWrapper>
         <NavBarItem>About</NavBarItem>
         <NavBarItem :is-icon="true">
-          <Icon
-            name="mingcute:home-3-fill"
-            class="h-10 w-10 duration-150"
-            mode="svg"
-          />
+          <Transition :css="false">
+            <Icon name="mingcute:home-3-fill" class="h-5 w-5" mode="css" />
+          </Transition>
         </NavBarItem>
         <NavBarItem>Features</NavBarItem>
       </NavBarWrapper>

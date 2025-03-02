@@ -10,14 +10,14 @@ onMounted(() => {
 </script>
 <template>
   <a
-    class="no-underline flex gradient complementary items-center rounded-full pl-2 py-1 text-xl md:text-2xl mt-4 min-w-fit"
+    class="no-underline flex gradient complementary items-center rounded-full pl-2 py-0.5 text-lg md:text-base mt-4 min-w-fit"
     ref="button"
     href="/"
   >
     Try it out!
     <Icon
       name="material-symbols:arrow-forward"
-      class="inline text-3xl md:text-4xl ml-2 bg-bg-color text-text rounded-full p-1"
+      class="inline text-xl md:text-2xl ml-2 bg-bg-color text-text rounded-full p-1"
       mode="svg"
     />
   </a>
