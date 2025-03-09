@@ -78,7 +78,7 @@
   }
 
   .btn {
-    @apply bg-primary rounded-base px-3 py-2;
+    @apply bg-primary rounded-base px-3 py-2 transition-all duration-300;
     box-shadow: 0.25rem 0.25rem 0 0 var(--color-primary-darker);
 
     &.active {

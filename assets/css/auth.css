@@ -1,5 +1,5 @@
 .auth-form {
-  @apply bg-secondary-darker/50 p-3 rounded-base md:w-md;
+  @apply bg-secondary-darker/50 p-1 md:p-3 rounded-base max-w-full md:w-md;
 
   & .text-input {
     @apply relative shadow-lg shadow-secondary-darker w-fit rounded-base has-focus:outline-2 outline-0;
