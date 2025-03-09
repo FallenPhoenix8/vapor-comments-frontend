@@ -1,0 +1,32 @@
+.auth-form {
+  @apply bg-secondary-darker/50 p-3 rounded-base md:w-md;
+
+  & .text-input {
+    @apply relative shadow-lg shadow-secondary-darker w-fit rounded-base has-focus:outline-2 outline-0;
+
+    & input[type="text"],
+    & input[type="password"] {
+      @apply block rounded-l-base bg-secondary backdrop-blur-sm px-2 py-1;
+
+      & ~ .status {
+        @apply grid place-content-center;
+      }
+
+      & ~ .icon {
+        @apply pr-2 py-1 grid place-content-center rounded-r-base bg-secondary;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &.valid {
+      @apply outline-1 outline-success;
+    }
+
+    &.invalid {
+      @apply outline-1 outline-error;
+    }
+  }
+}
