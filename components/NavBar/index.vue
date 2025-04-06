@@ -29,15 +29,7 @@ function slideIn() {
     >
       <ColorModeToggle />
 
-      <NavBarWrapper>
-        <NavBarItem>About</NavBarItem>
-        <NavBarItem :is-icon="true">
-          <Transition :css="false">
-            <Icon name="mingcute:home-3-fill" class="h-5 w-5" mode="css" />
-          </Transition>
-        </NavBarItem>
-        <NavBarItem>Features</NavBarItem>
-      </NavBarWrapper>
+      <NavBarDiscussion />
       <!-- <NavBarWrapper> -->
       <!-- <NavBarItem
         :complementary="true"

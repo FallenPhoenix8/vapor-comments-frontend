@@ -110,8 +110,7 @@
     }
   }
 
-  .iconify,
-  .nuxt-icon svg {
+  .iconify {
     @apply hover:text-primary group-hover:text-primary group-focus:text-primary dark:hover:text-primary-darker dark:group-hover:text-primary-darker dark:group-focus:text-primary-darker group-hover:scale-110 group-focus:scale-110 transition-all duration-200;
   }
 
