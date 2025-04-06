@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = defineProps({
-  onClick: {
-    type: Function as PropType<(payload: MouseEvent) => void>,
-    required: true,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    onClick?: (payload: MouseEvent) => void
+  }>(),
+  {
+    onClick: () => {},
+  }
+)
 
 const isActive = ref(false)
 

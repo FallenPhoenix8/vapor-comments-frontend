@@ -12,7 +12,7 @@ onMounted(() => {
   <a
     class="no-underline flex gradient complementary items-center rounded-full pl-2 py-0.5 text-lg md:text-base mt-4 min-w-fit"
     ref="button"
-    href="/"
+    href="/auth/register"
   >
     Try it out!
     <Icon

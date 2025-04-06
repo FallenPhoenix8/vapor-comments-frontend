@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./auth.css";
 
 @theme {
   --color-complementary: var(--color-blue-600);
@@ -8,6 +9,9 @@
   --color-primary: var(--color-amber-600);
   --color-primary-lighter: var(--color-amber-500);
   --color-primary-darker: var(--color-amber-800);
+
+  --color-success: var(--color-green-400);
+  --color-error: var(--color-red-500);
 
   --color-bg-color: var(--color-slate-900);
   --color-text: var(--color-white);
@@ -74,7 +78,7 @@
   }
 
   .btn {
-    @apply bg-primary rounded-base px-3 py-2;
+    @apply bg-primary rounded-base px-3 py-2 transition-all duration-300;
     box-shadow: 0.25rem 0.25rem 0 0 var(--color-primary-darker);
 
     &.active {
