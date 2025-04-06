@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { animate } from "motion"
 const button = ref<HTMLAnchorElement | null>(null)
 
 onMounted(() => {
