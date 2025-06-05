@@ -73,6 +73,10 @@
     @apply text-2xl;
   }
 
+  h4 {
+    @apply text-xl text-secondary capitalize;
+  }
+
   a {
     @apply underline underline-offset-4;
   }
@@ -88,6 +92,74 @@
 
     &:focus {
       outline-width: 0;
+    }
+
+    &:disabled {
+      @apply opacity-50 cursor-not-allowed;
+
+      &:hover,
+      &:focus {
+        @apply bg-primary;
+      }
+    }
+  }
+
+  .alert {
+    @apply p-2 m-2 rounded-base outline-1;
+    animation: var(--animate-slide-from-bottom);
+
+    &.success {
+      @apply bg-success/30 outline-success;
+    }
+
+    &.error {
+      @apply bg-error/30 outline-error;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: translate(-50%, -50%) rotateZ(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotateZ(360deg);
+    }
+  }
+
+  @keyframes rotateccw {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(-360deg);
+    }
+  }
+
+  @keyframes spin {
+    0%,
+    100% {
+      box-shadow: 0.2em 0px 0 0px currentcolor;
+    }
+    12% {
+      box-shadow: 0.2em 0.2em 0 0 currentcolor;
+    }
+    25% {
+      box-shadow: 0 0.2em 0 0px currentcolor;
+    }
+    37% {
+      box-shadow: -0.2em 0.2em 0 0 currentcolor;
+    }
+    50% {
+      box-shadow: -0.2em 0 0 0 currentcolor;
+    }
+    62% {
+      box-shadow: -0.2em -0.2em 0 0 currentcolor;
+    }
+    75% {
+      box-shadow: 0px -0.2em 0 0 currentcolor;
+    }
+    87% {
+      box-shadow: 0.2em -0.2em 0 0 currentcolor;
     }
   }
 

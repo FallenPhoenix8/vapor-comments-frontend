@@ -1,5 +1,20 @@
 <script setup lang="ts">
 import type { RegisterFieldCorrectStatus } from "~/types/RegisterFieldCorrectStatus"
+import axios from "axios"
+import User from "~/class/User"
+
+type PasswordValidationResult = {
+  isCorrect: boolean
+  reasons: string[]
+}
+
+const route = useRoute()
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const success = ref<string | null>(route.query.success?.toString() || null)
+const errorMessage = ref<string | null>(route.query.error?.toString() || null)
+
+const isLoading = ref<boolean>(false)
 
 const state = reactive<{
   username: string
@@ -52,7 +67,7 @@ function checkPassword(password: string) {
     hasUppercase &&
     hasSpecialCharacter
 
-  const result = {
+  const result: PasswordValidationResult = {
     isCorrect: isStrongPassword,
     reasons: [],
   }
@@ -75,9 +90,9 @@ function checkConfirmPassword(confirmPassword: string) {
     return null
   }
 
-  const result = {
+  const result: PasswordValidationResult = {
     isCorrect:
-      checkPassword(state.password)?.isCorrect &&
+      checkPassword(state.password)?.isCorrect === true &&
       confirmPassword === state.password,
     reasons: [],
   }
@@ -88,40 +103,104 @@ function checkConfirmPassword(confirmPassword: string) {
   return result
 }
 
-function handleSubmit(event: SubmitEvent) {
-  console.log(event.target)
+const isFilledCorrectly = computed(() => {
+  return (
+    checkUsername(state.username)?.isCorrect === true &&
+    checkPassword(state.password)?.isCorrect === true &&
+    checkConfirmPassword(state.confirmPassword)?.isCorrect === true
+  )
+})
+
+async function handleSubmit(event: Event) {
+  isLoading.value = true
+  const { target } = event
+  const formData = new FormData(target as HTMLFormElement)
+  const action = (target as HTMLFormElement).action
+
+  const username = formData.get("username") as string
+  const password = formData.get("password") as string
+  const confirmPassword = formData.get("confirmPassword") as string
+
+  const path = route.path
+
+  if (!checkConfirmPassword(confirmPassword)?.isCorrect) {
+    navigateTo(path + "?error=Passwords+do+not+match")
+    return
+  }
+
+  if (!checkPassword(password)?.isCorrect) {
+    navigateTo(path + "?error=Password+is+not+strong+enough")
+    return
+  }
+
+  if (!checkUsername(username)?.isCorrect) {
+    navigateTo(path + "?error=Username+is+incorrect")
+    return
+  }
+
+  if (!username || !password || !confirmPassword) {
+    navigateTo(path + "?error=All+fields+are+required")
+    return
+  }
+
+  try {
+    const user = await User.register(username, password, confirmPassword)
+    console.log(user)
+    isLoading.value = false
+  } catch (error) {
+    console.error(error)
+    isLoading.value = false
+    errorMessage.value =
+      "Error registering user. Please check the console for further information."
+    navigateTo(`${path}?error=${error}`)
+  }
 }
 </script>
 <template>
-  <form action="#" class="auth-form" @submit.prevent="handleSubmit">
+  <form
+    :action="`${apiUrl}/api/auth/register`"
+    class="auth-form"
+    @submit.prevent="handleSubmit"
+  >
     <header>
       <h2 class="text-center">Register</h2>
     </header>
-    <main class="flex flex-col gap-5 mx-auto md:w-fit">
-      <FormTextInput
-        name="username"
-        icon="material-symbols:person"
-        @update:modelValue="(newValue) => (state.username = newValue)"
-        :checker="checkUsername"
-        :is-register="true"
-      />
-      <FormTextInput
-        name="password"
-        type="password"
-        @update:modelValue="(newValue) => (state.password = newValue)"
-        :checker="checkPassword"
-        :is-register="true"
-      />
-      <FormTextInput
-        name="confirmPassword"
-        type="password"
-        @update:modelValue="(newValue) => (state.confirmPassword = newValue)"
-        :checker="checkConfirmPassword"
-        :is-register="true"
-        placeholder="Confirm your password..."
-        :no-label="true"
-      />
-      <Button>Register</Button>
+    <main class="flex mx-auto md:w-fit">
+      <aside class="flex flex-col gap-5">
+        <FormTextInput
+          name="username"
+          icon="material-symbols:person"
+          @update:modelValue="(newValue) => (state.username = newValue)"
+          :checker="checkUsername"
+          :is-register="true"
+        />
+        <FormTextInput
+          name="password"
+          type="password"
+          @update:modelValue="(newValue) => (state.password = newValue)"
+          :checker="checkPassword"
+          :is-register="true"
+        />
+        <FormTextInput
+          name="confirmPassword"
+          type="password"
+          @update:modelValue="(newValue) => (state.confirmPassword = newValue)"
+          :checker="checkConfirmPassword"
+          :is-register="true"
+          placeholder="Confirm your password..."
+          :no-label="true"
+        />
+        <ClientOnly>
+          <Button :disabled="!isFilledCorrectly" :is-loading="isLoading">
+            Register
+          </Button>
+        </ClientOnly>
+      </aside>
+
+      <aside>
+        <Alert :message="success" type="success" v-if="success" />
+        <Alert :message="errorMessage" type="error" v-if="errorMessage" />
+      </aside>
     </main>
   </form>
 </template>

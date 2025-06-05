@@ -55,7 +55,7 @@ const computedType = computed(() => {
           v-model="value"
         />
         <div class="icon">
-          <button v-if="type === 'password'">
+          <button v-if="type === 'password'" tabindex="-1">
             <Icon
               :name="
                 isVisiblePassword

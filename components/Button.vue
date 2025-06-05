@@ -2,9 +2,13 @@
 const props = withDefaults(
   defineProps<{
     onClick?: (payload: MouseEvent) => void
+    isLoading?: boolean
+    disabled?: boolean
   }>(),
   {
     onClick: () => {},
+    isLoading: false,
+    disabled: false,
   }
 )
 
@@ -27,8 +31,10 @@ function setActiveFalse() {
     @mouseleave="setActiveFalse"
     @focusin="setActiveTrue"
     @focusout="setActiveFalse"
-    @click="props.onClick"
+    @click="$props.onClick"
+    :disabled="$props.isLoading || $props.disabled"
   >
-    <slot />
+    <LoaderSpinner v-if="$props.isLoading" class="mx-auto" />
+    <slot v-else />
   </button>
 </template>
