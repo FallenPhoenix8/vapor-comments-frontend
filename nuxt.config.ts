@@ -24,5 +24,6 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/image",
     "motion-v/nuxt",
+    "@pinia/nuxt",
   ],
 })

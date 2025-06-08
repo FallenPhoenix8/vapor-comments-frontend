@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
+import User from "./class/User"
 
+const colorMode = useColorMode()
 // onMounted(() => {
 //   colorMode.preference = localStorage.getItem("color-mode") || "system"
 // })

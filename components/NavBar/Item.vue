@@ -16,7 +16,7 @@ const props = defineProps({
 </script>
 <template>
   <li
-    class="item flex rounded-full justify-center items-center min-h-full"
+    class="item clip-circle flex rounded-base justify-center items-center min-h-full"
     :class="{
       'is-icon': isIcon,
       'px-2 py-1': isPadding,

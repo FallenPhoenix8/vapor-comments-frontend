@@ -2,6 +2,7 @@
 import type { RegisterFieldCorrectStatus } from "~/types/RegisterFieldCorrectStatus"
 import axios from "axios"
 import User from "~/class/User"
+// import useUserStore from "~/store/user"
 
 type PasswordValidationResult = {
   isCorrect: boolean
@@ -30,21 +31,25 @@ watch(state, () => {
   console.log(state)
 })
 
-function checkUsername(username: string) {
+async function checkUsername(username: string) {
   if (username === null) {
     return null
   }
 
   const isCorrectLength = username.length >= 5
-  // TODO: check if username is available
+
+  const isUsernameExists = await User.isUserNameExists(username)
+  // console.log(isUsernameExists)
 
   const result: RegisterFieldCorrectStatus | null = {
-    isCorrect: isCorrectLength,
+    isCorrect: isCorrectLength && !isUsernameExists,
     reasons: [],
   }
 
   !isCorrectLength &&
     result.reasons.push("Username must be at least 5 characters long")
+
+  isUsernameExists && result.reasons.push("Username is already taken")
 
   return result
 }
@@ -103,14 +108,6 @@ function checkConfirmPassword(confirmPassword: string) {
   return result
 }
 
-const isFilledCorrectly = computed(() => {
-  return (
-    checkUsername(state.username)?.isCorrect === true &&
-    checkPassword(state.password)?.isCorrect === true &&
-    checkConfirmPassword(state.confirmPassword)?.isCorrect === true
-  )
-})
-
 async function handleSubmit(event: Event) {
   isLoading.value = true
   const { target } = event
@@ -123,30 +120,46 @@ async function handleSubmit(event: Event) {
 
   const path = route.path
 
+  if (!username || !password || !confirmPassword) {
+    navigateTo(path + "?error=All+fields+are+required")
+    isLoading.value = false
+    return
+  }
+
   if (!checkConfirmPassword(confirmPassword)?.isCorrect) {
     navigateTo(path + "?error=Passwords+do+not+match")
+    isLoading.value = false
     return
   }
 
   if (!checkPassword(password)?.isCorrect) {
     navigateTo(path + "?error=Password+is+not+strong+enough")
+    isLoading.value = false
     return
   }
 
-  if (!checkUsername(username)?.isCorrect) {
+  if (!(await checkUsername(username))?.isCorrect) {
     navigateTo(path + "?error=Username+is+incorrect")
+    isLoading.value = false
     return
   }
 
   if (!username || !password || !confirmPassword) {
     navigateTo(path + "?error=All+fields+are+required")
+    isLoading.value = false
     return
   }
 
   try {
-    const user = await User.register(username, password, confirmPassword)
-    console.log(user)
+    // const user = await User.register(username, password, confirmPassword)
+    // console.log(user)
+    const user = useUser()
+    await user.register(username, password, confirmPassword)
     isLoading.value = false
+    navigateTo("/app", {
+      replace: true,
+      redirectCode: 301,
+    })
   } catch (error) {
     console.error(error)
     isLoading.value = false
@@ -155,52 +168,90 @@ async function handleSubmit(event: Event) {
     navigateTo(`${path}?error=${error}`)
   }
 }
+
+const isCorrectUsername = ref<boolean | undefined>(undefined)
+const isCorrectPassword = ref<boolean | undefined>(undefined)
+const isCorrectConfirmPassword = ref<boolean | undefined>(undefined)
+
+const isFilledCorrectly = computed(() => {
+  return (
+    isCorrectUsername.value === true &&
+    isCorrectPassword.value === true &&
+    isCorrectConfirmPassword.value === true
+  )
+})
+
+watch(
+  () => state.username,
+  async () => {
+    isCorrectUsername.value = (await checkUsername(state.username))?.isCorrect
+  }
+)
+watch(
+  () => state.password,
+  () => {
+    isCorrectPassword.value = checkPassword(state.password)?.isCorrect
+  }
+)
+watch(
+  () => state.confirmPassword,
+  () => {
+    isCorrectConfirmPassword.value = checkConfirmPassword(
+      state.confirmPassword
+    )?.isCorrect
+  }
+)
 </script>
 <template>
   <form
     :action="`${apiUrl}/api/auth/register`"
     class="auth-form"
     @submit.prevent="handleSubmit"
+    method="post"
   >
     <header>
       <h2 class="text-center">Register</h2>
     </header>
-    <main class="flex mx-auto md:w-fit">
-      <aside class="flex flex-col gap-5">
-        <FormTextInput
-          name="username"
-          icon="material-symbols:person"
-          @update:modelValue="(newValue) => (state.username = newValue)"
-          :checker="checkUsername"
-          :is-register="true"
-        />
-        <FormTextInput
-          name="password"
-          type="password"
-          @update:modelValue="(newValue) => (state.password = newValue)"
-          :checker="checkPassword"
-          :is-register="true"
-        />
-        <FormTextInput
-          name="confirmPassword"
-          type="password"
-          @update:modelValue="(newValue) => (state.confirmPassword = newValue)"
-          :checker="checkConfirmPassword"
-          :is-register="true"
-          placeholder="Confirm your password..."
-          :no-label="true"
-        />
-        <ClientOnly>
-          <Button :disabled="!isFilledCorrectly" :is-loading="isLoading">
-            Register
-          </Button>
-        </ClientOnly>
-      </aside>
+    <main class="flex flex-col gap-5 mx-auto md:w-fit">
+      <!-- <aside class="flex flex-col gap-5"> -->
+      <FormTextInput
+        name="username"
+        icon="material-symbols:person"
+        @update:modelValue="(newValue) => (state.username = newValue)"
+        :checker="checkUsername"
+        :is-register="true"
+      />
+      <FormTextInput
+        name="password"
+        type="password"
+        @update:modelValue="(newValue) => (state.password = newValue)"
+        :checker="checkPassword"
+        :is-register="true"
+      />
+      <FormTextInput
+        name="confirmPassword"
+        type="password"
+        @update:modelValue="(newValue) => (state.confirmPassword = newValue)"
+        :checker="checkConfirmPassword"
+        :is-register="true"
+        placeholder="Confirm your password..."
+        :no-label="true"
+      />
+      <p class="text-sm">
+        Already have an account?
+        <NuxtLink to="/auth/login">You can login here!</NuxtLink>
+      </p>
+      <ClientOnly>
+        <Button :disabled="!isFilledCorrectly" :is-loading="isLoading">
+          Register
+        </Button>
+      </ClientOnly>
+      <!-- </aside> -->
 
-      <aside>
+      <!-- <aside>
         <Alert :message="success" type="success" v-if="success" />
         <Alert :message="errorMessage" type="error" v-if="errorMessage" />
-      </aside>
+      </aside> -->
     </main>
   </form>
 </template>

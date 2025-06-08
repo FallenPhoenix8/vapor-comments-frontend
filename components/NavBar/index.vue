@@ -1,5 +1,14 @@
 <script setup lang="ts">
-const user = await useUser()
+import User from "~/class/User"
+// const user = await useUser()
+// const user: Ref<User | null> = ref(null)
+
+// onMounted(async () => {
+//   const userData = await useUser()
+//   user.value = userData.value
+//   console.log(user.value)
+// })
+const user = useUser()
 </script>
 
 <template>
@@ -8,14 +17,18 @@ const user = await useUser()
   >
     <ColorModeToggle />
 
-    <NavBarDiscussion />
     <!-- <NavBarWrapper> -->
     <!-- <NavBarItem
-        :complementary="true"
-        v-if="!user?.authorized"
-        :is-padding="false"
+      :complementary="true"
+      v-if="!user?.authorized"
+      :is-padding="false"
       > -->
-    <NavBarTryItButton class="fixed right-1 top-1 md:static" />
+    <NavbarWrapper v-if="!user.isAuthenticated"></NavbarWrapper>
+    <NavBarTryItButton
+      class="fixed right-1 top-1 md:static"
+      v-if="!user.user"
+    />
+    <NavBarDiscussion v-else />
     <!-- </NavBarItem> -->
     <!-- </NavBarWrapper> -->
   </nav>

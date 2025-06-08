@@ -75,13 +75,52 @@ export default class User {
     }
   }
 
-  public async isAuthorized() {
-    try {
-      const response = await axios.get("/api/auth/me")
+  // public async isAuthorized() {
+  //   try {
+  //     const response = await axios.get(`${User.apiUrl}/api/auth/me`)
 
-      return response.status === 200 || response.status === 201
-    } catch (err) {
-      console.error(err)
+  //     return response.status === 200 || response.status === 201
+  //   } catch (err) {
+  //     console.error(err)
+  //     return false
+  //   }
+  // }
+
+  async logout() {
+    console.log("Logging out user...")
+    try {
+      await axios.get(`${User.apiUrl}/api/auth/logout`, {
+        withCredentials: true,
+      })
+      // useCookie("token").value = null
+      // document.cookie = "token=test; maxAge=1; path=/;"
+      console.log("User logged out successfully.")
+      return true
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to logout user: " + error)
+    }
+    // navigateTo("/", {
+    //   redirectCode: 301,
+    // })
+  }
+
+  static async isUserNameExists(username: string): Promise<boolean> {
+    if (!username) {
+      return false
+    }
+
+    console.log("Checking if username exists...")
+    try {
+      const res = await axios.get(`${User.apiUrl}/api/auth/username-exists`, {
+        params: {
+          username,
+        },
+      })
+
+      return res.data.exists as boolean
+    } catch (error) {
+      // console.error(error)
       return false
     }
   }

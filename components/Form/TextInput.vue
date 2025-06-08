@@ -8,7 +8,9 @@ const props = withDefaults(
     type?: string
     isRegister?: boolean
     noLabel?: boolean
-    checker: (string) => RegisterFieldCorrectStatus | null
+    checker?:
+      | ((_: string) => Promise<RegisterFieldCorrectStatus | null>)
+      | ((_: string) => RegisterFieldCorrectStatus | null)
   }>(),
   {
     type: "text",
@@ -20,10 +22,11 @@ const props = withDefaults(
 const fieldCorrectStatus = ref<RegisterFieldCorrectStatus | null>(null)
 
 const emit = defineEmits(["update:modelValue"])
-const value = ref(null)
+const value = ref<null | string>(null)
 
-watch(value, () => {
-  fieldCorrectStatus.value = props.checker(value.value)
+watch(value, async () => {
+  if (props.checker === undefined) return
+  fieldCorrectStatus.value = await props.checker(value.value ?? "")
 })
 
 const isVisiblePassword = ref<boolean>(false)
@@ -50,8 +53,10 @@ const computedType = computed(() => {
           :type="computedType"
           :name="name"
           :id="name"
-          :placeholder="$attrs.placeholder || `Enter your ${name}...`"
-          @input="emit('update:modelValue', $event.target.value)"
+          :placeholder="$attrs.placeholder as string || `Enter your ${name}...`"
+          @input="
+            emit('update:modelValue', ($event.target as HTMLInputElement).value)
+          "
           v-model="value"
         />
         <div class="icon">
@@ -74,7 +79,7 @@ const computedType = computed(() => {
           <Icon :name="icon" mode="svg" class="inline" v-if="icon" />
         </div>
       </div>
-      <div class="status">
+      <div class="status" v-if="props.checker">
         <Icon
           v-if="isRegister && fieldCorrectStatus?.isCorrect === true"
           name="material-symbols:check"

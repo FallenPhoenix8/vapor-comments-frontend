@@ -1,4 +1,5 @@
-export default async function () {
-  const { data } = await useFetch("/api/get-user")
-  return data
+import useUserStore from "~/store/user"
+
+export default function () {
+  return useUserStore()
 }
