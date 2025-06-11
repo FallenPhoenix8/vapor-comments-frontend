@@ -9,5 +9,5 @@ const colorMode = useColorMode()
 
 <template>
   <NavBar />
-  <NuxtPage />
+  <NuxtPage class="pt-14" />
 </template>

@@ -10,6 +10,8 @@
   --color-primary-lighter: var(--color-amber-500);
   --color-primary-darker: var(--color-amber-800);
 
+  --color-muted: var(--color-gray-400);
+
   --color-success: var(--color-green-400);
   --color-error: var(--color-red-500);
 
@@ -32,6 +34,8 @@
     --color-text: var(--color-black);
     --color-secondary: var(--color-zinc-50);
     --color-secondary-darker: var(--color-zinc-200);
+
+    --color-muted: var(--color-gray-500);
 
     --color-complementary: var(--color-blue-500);
     --color-complementary-lighter: var(--color-blue-300);
