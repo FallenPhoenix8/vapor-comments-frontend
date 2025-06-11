@@ -78,7 +78,7 @@
   }
 
   h4 {
-    @apply text-xl text-secondary capitalize;
+    @apply text-xl text-secondary;
   }
 
   a {

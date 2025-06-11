@@ -12,4 +12,6 @@ function logData() {
   console.log(user.user)
 }
 </script>
-<template></template>
+<template>
+  <AppDiscussionList />
+</template>

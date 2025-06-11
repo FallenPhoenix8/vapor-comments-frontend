@@ -86,6 +86,16 @@ export default class User {
   //   }
   // }
 
+  static async getUserById(id: string) {
+    try {
+      const response = await axios.get(`${User.apiUrl}/api/users/${id}`)
+      return response.data as User
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to fetch user data: " + error)
+    }
+  }
+
   async logout() {
     console.log("Logging out user...")
     try {
@@ -122,6 +132,21 @@ export default class User {
     } catch (error) {
       // console.error(error)
       return false
+    }
+  }
+
+  async isParticipant(ofDiscussionId: string): Promise<boolean> {
+    try {
+      const res = await axios.get(
+        `${User.apiUrl}/api/discussions/${ofDiscussionId}/is-participant`,
+        {
+          withCredentials: true,
+        }
+      )
+      return res.data as boolean
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to check if user is participant: " + error)
     }
   }
 }
