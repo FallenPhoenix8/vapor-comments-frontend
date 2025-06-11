@@ -12,6 +12,4 @@ function logData() {
   console.log(user.user)
 }
 </script>
-<template>
-  <main></main>
-</template>
+<template></template>
