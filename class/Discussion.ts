@@ -42,4 +42,21 @@ export default class Discussion {
       return null
     }
   }
+
+  static async getDiscussionWithDetails(
+    discussionId: string
+  ): Promise<Discussion> {
+    try {
+      const response = await axios.get(
+        `${User.apiUrl}/api/discussions/${discussionId}/details`,
+        {
+          withCredentials: true,
+        }
+      )
+      return response.data as Discussion
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to fetch discussion details: " + error)
+    }
+  }
 }

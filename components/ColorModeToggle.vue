@@ -58,7 +58,7 @@ function changeColorMode() {
 <template>
   <motion.button
     @click="changeColorMode"
-    class="p-1 dark:bg-secondary/10 bg-secondary-darker rounded-base md:static fixed top-4 left-4 z-50 cursor-pointer"
+    class="p-1 dark:bg-secondary/10 bg-secondary-darker rounded-base md:static cursor-pointer"
   >
     <motion.svg
       viewBox="0 0 476 476"

@@ -12,9 +12,7 @@ const user = useUser()
 </script>
 
 <template>
-  <nav
-    class="fixed left-0 right-0 bottom-5 md:bottom-auto flex justify-center md:justify-between items-center px-5 z-50"
-  >
+  <nav class="flex justify-between items-center px-2 pt-2 z-50">
     <ColorModeToggle />
 
     <!-- <NavBarWrapper> -->
@@ -23,11 +21,8 @@ const user = useUser()
       v-if="!user?.authorized"
       :is-padding="false"
       > -->
-    <NavbarWrapper v-if="!user.isAuthenticated"></NavbarWrapper>
-    <NavBarTryItButton
-      class="fixed right-1 top-1 md:static"
-      v-if="!user.user"
-    />
+    <!-- <NavbarWrapper v-if="!user.isAuthenticated"></NavbarWrapper> -->
+    <NavBarTryItButton class="" v-if="!user.user" />
     <NavBarDiscussion v-else />
     <!-- </NavBarItem> -->
     <!-- </NavBarWrapper> -->

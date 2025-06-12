@@ -8,9 +8,16 @@ const { data: author } = await useAsyncData("author", () =>
   User.getUserById(props.discussion.author.id as string)
 )
 
-const isParticipant = await useUser().user?.isParticipant(
-  props.discussion.id as string
+const isParticipant = ref<boolean>(
+  (await useUser().user?.isParticipant(
+    props.discussion.id as string
+  )) as boolean
 )
+
+async function joinDiscussion(discussionId: string) {
+  await useUser().user?.joinDiscussion(discussionId)
+  isParticipant.value = true
+}
 </script>
 
 <template>
@@ -31,9 +38,15 @@ const isParticipant = await useUser().user?.isParticipant(
       </div>
     </div>
     <div class="p-1 flex justify-end">
-      <Button :disabled="isParticipant">{{
-        isParticipant ? "Already joined" : "Join"
-      }}</Button>
+      <Button v-if="!isParticipant" @click="joinDiscussion(props.discussion.id)"
+        >Join</Button
+      >
+      <NuxtLink
+        v-else
+        :to="`/app/discussions/${props.discussion.id}`"
+        class="btn-link"
+        >Go to discussion</NuxtLink
+      >
     </div>
   </div>
 </template>

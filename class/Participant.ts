@@ -1,5 +1,6 @@
 import User from "./User"
 import Comment from "./Comment"
+import axios from "axios"
 
 export type Status = "active" | "inactive"
 export default class Participant {
@@ -30,5 +31,23 @@ export default class Participant {
     this.status = status
     this.comments = comments
     this.isAuthor = isAuthor
+  }
+
+  static async getParticipantById(
+    discussionId: string,
+    participantId: string
+  ): Promise<Participant> {
+    try {
+      const response = await axios.get(
+        `${User.apiUrl}/api/discussions/${discussionId}/participants/${participantId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      return response.data as Participant
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to fetch participant data: " + error)
+    }
   }
 }

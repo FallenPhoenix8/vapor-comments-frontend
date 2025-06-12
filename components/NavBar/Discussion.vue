@@ -24,7 +24,7 @@ const isAppPath = useRoute().path.includes("app")
 </template>
 <style scoped>
 .item {
-  height: calc(var(--spacing) * 12);
-  width: calc(var(--spacing) * 12);
+  height: calc(var(--spacing) * 10);
+  width: calc(var(--spacing) * 10);
 }
 </style>

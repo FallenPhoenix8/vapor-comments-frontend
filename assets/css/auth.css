@@ -1,26 +1,30 @@
 .auth-form {
-  @apply bg-secondary-darker/50 px-2 py-3 md:px-3 rounded-base max-w-full md:w-min;
+  @apply bg-secondary-darker/50 px-2 py-3 md:px-3 mx-1 md:mx-3 rounded-base max-w-full box-border;
 
   & .text-input {
-    @apply relative shadow-lg shadow-secondary-darker w-fit rounded-base has-focus:outline-2 outline-0;
+    @apply relative shadow-lg shadow-secondary-darker w-full max-w-full rounded-base has-focus:outline-2 outline-0 box-border;
 
     & input[type="text"],
     & input[type="password"] {
-      @apply block rounded-l-base bg-secondary backdrop-blur-sm px-2 py-1;
+      @apply block rounded-base bg-secondary backdrop-blur-sm px-2 py-1 w-full min-w-0 box-border pr-10;
 
       & ~ .status {
-        @apply grid place-content-center;
+        @apply grid place-content-center absolute right-8 top-0 bottom-0;
       }
 
       & ~ .icon {
-        @apply pr-2 py-1 grid place-content-center rounded-r-base bg-secondary;
+        @apply pr-2 py-1 grid place-content-center rounded-base bg-secondary absolute right-0 top-0 bottom-0 w-8;
       }
 
       &:focus {
         outline: none;
       }
+
+      /* Responsive text sizing */
+      @apply text-sm md:text-base;
     }
 
+    /* Better spacing for mobile */
     &.valid {
       @apply outline-1 outline-success;
     }

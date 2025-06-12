@@ -149,4 +149,23 @@ export default class User {
       throw new Error("Failed to check if user is participant: " + error)
     }
   }
+
+  async joinDiscussion(discussionId: string) {
+    try {
+      const res = await axios.post(
+        `${User.apiUrl}/api/discussions/${discussionId}/join`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      if (!(res.status === 200 || res.status === 201)) {
+        console.error(res.statusText)
+        throw new Error("Failed to join discussion: " + res.statusText)
+      }
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to join discussion: " + error)
+    }
+  }
 }

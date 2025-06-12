@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./auth.css";
+@import "./app.css";
 
 @theme {
   --color-complementary: var(--color-blue-600);
@@ -105,6 +106,15 @@
       &:focus {
         @apply bg-primary;
       }
+    }
+  }
+
+  .btn-link {
+    @apply rounded-base bg-complementary px-3 py-2 transition-all duration-300 shadow-md shadow-complementary-lighter decoration-0;
+
+    &:focus,
+    &:hover {
+      @apply -translate-y-0.5;
     }
   }
 

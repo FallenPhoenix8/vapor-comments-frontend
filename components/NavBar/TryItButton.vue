@@ -9,14 +9,14 @@ onMounted(() => {
 </script>
 <template>
   <a
-    class="no-underline flex gradient complementary items-center rounded-full pl-2 py-0.5 text-lg md:text-base mt-4 min-w-fit"
+    class="no-underline flex gradient complementary items-center rounded-full pl-2 py-0.5 text-lg md:text-base min-w-fit"
     ref="button"
     href="/auth/register"
   >
     Try it out!
     <Icon
       name="material-symbols:arrow-forward"
-      class="inline text-xl md:text-2xl ml-2 bg-bg-color text-text rounded-full p-1"
+      class="inline text-2xl ml-2 bg-bg-color text-text rounded-full p-1 clip-circle"
       mode="svg"
     />
   </a>
@@ -30,6 +30,7 @@ a {
 a > svg {
   transition: transform 0.8s ease-in;
   transform: rotate(0);
+  /*
   clip-path: polygon(
     47.889% 2.626%,
     47.889% 2.626%,
@@ -393,6 +394,7 @@ a > svg {
     43.834% 5.923%,
     47.889% 2.626%
   );
+  */
 }
 
 a.loaded > svg {
