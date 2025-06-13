@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: ["guest"],
-})
-
 useTitle().setPageTitle("Vapor Comments | Register")
 </script>
 <template>

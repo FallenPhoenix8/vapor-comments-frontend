@@ -10,7 +10,22 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/app/**": { ssr: false },
+    "/app/**": {
+      ssr: false,
+      appMiddleware: {
+        auth: true,
+      },
+    },
+    "/auth/register": {
+      appMiddleware: {
+        guest: true,
+      },
+    },
+    "/auth/login": {
+      appMiddleware: {
+        guest: true,
+      },
+    },
   },
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },

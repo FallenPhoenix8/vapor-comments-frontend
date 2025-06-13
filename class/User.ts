@@ -16,6 +16,22 @@ export default class User {
     this.profilePicture = profilePicture
   }
 
+  static async isAuthenticated() {
+    try {
+      const response = await axios.get(
+        `${User.apiUrl}/api/auth/is-authenticated`,
+        {
+          withCredentials: true,
+        }
+      )
+
+      return response.data as boolean
+    } catch (error) {
+      console.error(error)
+      return false
+    }
+  }
+
   static async login(username: string, password: string) {
     try {
       await axios.post(

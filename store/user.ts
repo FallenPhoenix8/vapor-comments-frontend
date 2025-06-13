@@ -5,7 +5,11 @@ export default defineStore("user", () => {
   const state = ref<User | null>()
   getMe().then((user) => (state.value = user))
   const user = computed(() => state.value)
-  const isAuthenticated = computed(() => state.value !== null)
+  // const isAuthenticated = computed(() => state.value !== null)
+
+  async function isAuthenticated() {
+    return await User.isAuthenticated()
+  }
 
   async function login(username: string, password: string) {
     state.value = await User.login(username, password)
@@ -45,9 +49,13 @@ export default defineStore("user", () => {
       if (!res.data.id || !res.data.username) {
         return null
       }
-      return new User(res.data.id, res.data.username, res.data.profilePicture)
+      const user = new User(
+        res.data.id,
+        res.data.username,
+        res.data.profilePicture
+      )
+      return user
     } catch (error) {
-      console.error(error)
       return null
     }
   }

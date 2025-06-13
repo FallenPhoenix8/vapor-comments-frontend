@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import User from "~/class/User"
 const user = useUser()
-definePageMeta({
-  middleware: ["auth"],
-})
 
 useTitle().setPageTitle("Vapor Comments | App")
 

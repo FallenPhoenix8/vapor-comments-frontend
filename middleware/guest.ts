@@ -8,5 +8,6 @@ function redirect() {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (useUser().isAuthenticated) return redirect()
+  // console.log("Guest middleware executed in", navigator.userAgent)
+  if (await useUser().isAuthenticated()) return redirect()
 })

@@ -45,5 +45,5 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   //   if (!auth) {
   //     return navigateTo("/", { redirectCode: 301, replace: true })
   //   }
-  if (!useUser().isAuthenticated) return redirect()
+  if ((await useUser().isAuthenticated()) === false) return redirect()
 })
