@@ -3,6 +3,8 @@ const user = useUser()
 function logout() {
   return user.logout()
 }
+
+useTitle().setPageTitle(`Profile | ${user.user?.username}`)
 </script>
 <template>
   <!-- <main> -->

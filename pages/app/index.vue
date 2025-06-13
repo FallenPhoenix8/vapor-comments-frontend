@@ -5,6 +5,8 @@ definePageMeta({
   middleware: ["auth"],
 })
 
+useTitle().setPageTitle("Vapor Comments | App")
+
 function logout() {
   user.logout()
 }

@@ -14,9 +14,7 @@ const comments = ref<Comment[]>(discussionDetails.value?.comments ?? [])
 
 const title = computed(() => discussionDetails.value?.title)
 
-useHead({
-  title: `Discussion | ${title.value}`,
-})
+useTitle().setPageTitle(`Discussion | ${title.value}`)
 
 console.log(discussionDetails.value)
 
