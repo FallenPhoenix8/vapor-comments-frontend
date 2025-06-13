@@ -3,23 +3,38 @@
 }
 
 .comment {
-    @apply flex flex-col py-1 px-2 max-w-sm shadow-md rounded-base;
+    @apply relative flex flex-col py-1 px-2 max-w-sm shadow-md rounded-base;
 
     &.owned {
      @apply bg-primary self-end shadow-primary-darker;
 
      & .heading {
         @apply self-end;
+
+        
      }
     }
 
     &:not(.owned) {
-        @apply bg-complementary self-start shadow-complementary-darker;
+        @apply bg-complementary-lighter self-start shadow-complementary;
+
+        & .profile-picture {
+            @apply -order-1;
+        }
     }
 
     & .heading {
-        @apply text-muted text-sm;
+        @apply flex gap-1.5 text-muted text-sm;
     }
 
+    & .profile-picture {
+        @apply rounded-full w-5 h-5 bg-secondary-darker p-1;
+
+        & img {
+            @apply rounded-full w-full h-full aspect-square object-contain;
+        }
+    }
+
+    
 
 }

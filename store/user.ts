@@ -45,7 +45,7 @@ export default defineStore("user", () => {
       if (!res.data.id || !res.data.username) {
         return null
       }
-      return new User(res.data.id, res.data.username)
+      return new User(res.data.id, res.data.username, res.data.profilePicture)
     } catch (error) {
       console.error(error)
       return null

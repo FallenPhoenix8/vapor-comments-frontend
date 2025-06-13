@@ -3,11 +3,17 @@ import axios from "axios"
 export default class User {
   id: string | null
   username: string | null
+  profilePicture: string | null
   static apiUrl = import.meta.env.VITE_API_URL
 
-  constructor(id: string | null, username: string | null) {
+  constructor(
+    id: string | null,
+    username: string | null,
+    profilePicture: string | null
+  ) {
     this.id = id
     this.username = username
+    this.profilePicture = profilePicture
   }
 
   static async login(username: string, password: string) {
@@ -37,7 +43,11 @@ export default class User {
       }
       console.log("User data fetched successfully.")
 
-      return new User(userData.data.id, userData.data.username)
+      return new User(
+        userData.data.id,
+        userData.data.username,
+        userData.data.profilePicture
+      )
     } catch (error) {
       console.error(error)
       throw new Error("Failed to fetch user")

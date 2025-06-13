@@ -26,7 +26,7 @@ async function joinDiscussion(discussionId: string) {
   >
     <div class="flex justify-between gap-3">
       <img
-        :src="props.discussion.picture ?? ''"
+        :src="props.discussion.picture ?? '/img/discussion-placeholder.png'"
         :alt="'Profile picture of ' + props.discussion.title"
         class="rounded-full aspect-square h-16 object-cover"
       />
