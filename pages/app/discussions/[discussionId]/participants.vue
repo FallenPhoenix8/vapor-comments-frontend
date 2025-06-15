@@ -1,4 +1,25 @@
 <script setup lang="ts">
-const discussionId = useRoute().params.discussionId
+import Participant from "~/class/Participant"
+
+const discussionId = useRoute().params.discussionId as string
+const discussion = await useDiscussion(discussionId)
+console.log(discussion.details?.participants)
+
+async function leaveDiscussion() {
+  const participant = await Participant.getParticipantByUserId(
+    discussionId,
+    useUser().user?.id as string
+  )
+
+  await participant.leaveDiscussion()
+  await navigateTo("/app")
+}
 </script>
-<template></template>
+<template>
+  <AppParticipantList
+    :participants="discussion.details?.participants ?? []"
+    :discussion-title="discussion.details?.title ?? ''"
+    :discussion-id="discussionId"
+    @leave-discussion="leaveDiscussion()"
+  />
+</template>

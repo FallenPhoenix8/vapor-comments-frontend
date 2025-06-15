@@ -34,7 +34,7 @@ async function leaveDiscussion(discussionId: string) {
 </script>
 <template>
   <div
-    class="rounded-base px-1 md:px-3 bg-secondary-darker/50"
+    class="flex justify-between rounded-base px-1 md:px-3 bg-secondary-darker/50"
     :class="$attrs.class"
   >
     <ButtonIcon

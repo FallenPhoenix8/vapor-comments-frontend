@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Comment from "~/class/Comment"
-import useDiscussionDetails from "~/composables/useDiscussionDetails"
+import useDiscussionDetails from "~/composables/useDiscussion"
 
 const route = useRoute()
 const discussionId = route.params.discussionId as string
@@ -10,7 +10,7 @@ const discussionId = route.params.discussionId as string
 //   () => Discussion.getDiscussionWithDetails(discussionId)
 // )
 
-const discussion = await useDiscussionDetails(discussionId)
+const discussion = await useDiscussion(discussionId)
 
 const comments = ref<Comment[]>(discussion.details?.comments ?? [])
 

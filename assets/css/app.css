@@ -1,40 +1,51 @@
 .comments-list {
-    @apply flex flex-col gap-3 overflow-y-scroll max-h-full py-5 px-2 bg-secondary-darker/50 rounded-base;
+  @apply flex flex-col gap-3 overflow-y-scroll max-h-full py-5 px-2 bg-secondary-darker/50 rounded-base;
 }
 
 .comment {
-    @apply relative flex flex-col py-1 px-2 max-w-sm shadow-md rounded-base;
+  @apply relative flex flex-col py-1 px-2 max-w-sm shadow-md rounded-base;
 
-    &.owned {
-     @apply bg-primary self-end shadow-primary-darker;
-
-     & .heading {
-        @apply self-end;
-
-        
-     }
-    }
-
-    &:not(.owned) {
-        @apply bg-complementary-lighter self-start shadow-complementary;
-
-        & .profile-picture {
-            @apply -order-1;
-        }
-    }
+  &.owned {
+    @apply bg-primary self-end shadow-primary-darker;
 
     & .heading {
-        @apply flex gap-1.5 text-muted text-sm;
+      @apply self-end;
     }
+  }
+
+  &:not(.owned) {
+    @apply bg-complementary-lighter self-start shadow-complementary;
 
     & .profile-picture {
-        @apply rounded-full w-5 h-5 bg-secondary-darker p-1;
-
-        & img {
-            @apply rounded-full w-full h-full aspect-square object-contain;
-        }
+      @apply -order-1;
     }
+  }
 
-    
+  & .heading {
+    @apply flex gap-1.5 text-muted text-sm;
+  }
 
+  & .profile-picture {
+    @apply rounded-full w-5 h-5 bg-secondary-darker;
+
+    & img {
+      @apply rounded-full w-full h-full aspect-square object-contain;
+    }
+  }
+}
+
+.participant-list {
+  @apply flex flex-col gap-3 overflow-y-auto max-h-full py-5 px-2 bg-secondary-darker/50 rounded-base max-w-md mx-1 md:mx-auto;
+
+  & .content {
+    @apply flex flex-col gap-2;
+  }
+
+  & .participant-card {
+    @apply flex gap-2 items-center border-y-2 border-secondary-darker py-2 px-1;
+
+    & img {
+      @apply rounded-full w-10 h-10 object-cover;
+    }
+  }
 }
