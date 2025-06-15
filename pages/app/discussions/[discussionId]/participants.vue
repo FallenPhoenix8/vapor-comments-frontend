@@ -14,12 +14,16 @@ async function leaveDiscussion() {
   await participant.leaveDiscussion()
   await navigateTo("/app")
 }
+
+const discussionString = computed(() => JSON.stringify(discussion.details))
 </script>
 <template>
   <AppParticipantList
-    :participants="discussion.details?.participants ?? []"
-    :discussion-title="discussion.details?.title ?? ''"
+    :participants="discussion.details.participants ?? []"
+    :discussion-title="discussion.details.title ?? ''"
     :discussion-id="discussionId"
     @leave-discussion="leaveDiscussion()"
+    v-if="discussion.details"
+    :key="discussionString"
   />
 </template>

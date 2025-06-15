@@ -37,6 +37,14 @@
 .participant-list {
   @apply flex flex-col gap-3 overflow-y-auto max-h-full py-5 px-2 bg-secondary-darker/50 rounded-base max-w-md mx-1 md:mx-auto;
 
+  & .heading {
+    @apply flex gap-1.5;
+
+    & .status-text {
+      @apply flex items-center gap-1.5 text-muted text-sm;
+    }
+  }
+
   & .content {
     @apply flex flex-col gap-2;
   }
@@ -45,7 +53,7 @@
     @apply flex gap-2 items-center border-y-2 border-secondary-darker py-2 px-1;
 
     & img {
-      @apply rounded-full w-10 h-10 object-cover;
+      @apply rounded-full w-10 h-10 object-contain aspect-square;
     }
   }
 }

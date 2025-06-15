@@ -1,14 +1,16 @@
 import Discussion from "~/class/Discussion"
 import Participant from "~/class/Participant"
 
-export default async (discussionId: string) => {
+export default async (
+  discussionId: string,
+  heartbeatTimeout: number = 10000
+) => {
   const { data: discussionDetails } = await useAsyncData(
     `discussion-details-${discussionId}`,
     () => Discussion.getDiscussionWithDetails(discussionId)
   )
 
   const lastPong = ref(Date.now())
-  const heartbeatTimeout = 1000 // ms: max time to wait for pong after ping
 
   // Connection state management
   const connectionState = ref<
