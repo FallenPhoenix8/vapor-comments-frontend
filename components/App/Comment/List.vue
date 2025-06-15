@@ -20,18 +20,6 @@ function scrollToBottom() {
 onMounted(() => {
   scrollToBottom()
 })
-
-watch(
-  () => props.comments,
-  () => {
-    setTimeout(() => {
-      scrollToBottom()
-    }, 500) // scroll to bottom after 500ms
-  },
-  {
-    deep: true,
-  }
-)
 </script>
 
 <template>

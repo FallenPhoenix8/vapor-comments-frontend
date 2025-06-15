@@ -52,7 +52,11 @@ watch(discussion, () => {
     <AppDiscussionControls
       :discussionId="discussionId"
       class="my-2"
-      @leave="discussion.socket.close()"
+      @leave="
+        discussion.disconnect(
+          'User left discussion. WebSocket connection closed.'
+        )
+      "
     />
     <AppCommentList :comments="discussion.details.comments" />
   </main>
