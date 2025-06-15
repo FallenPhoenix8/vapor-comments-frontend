@@ -59,4 +59,32 @@ export default class Discussion {
       throw new Error("Failed to fetch discussion details: " + error)
     }
   }
+
+  static async create(title: string) {
+    try {
+      const res = await axios.post(
+        `${User.apiUrl}/api/discussions/create/${title}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      return Discussion.all()
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to create discussion: " + error)
+    }
+  }
+
+  static async isTitleTaken(title: string) {
+    try {
+      const res = await axios.get(
+        `${User.apiUrl}/api/discussions/is-title-taken/${title}`
+      )
+      return res.data as boolean
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to check if title is taken: " + error)
+    }
+  }
 }

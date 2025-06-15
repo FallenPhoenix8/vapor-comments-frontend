@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import Discussion from "~/class/Discussion"
-const apiUrlBase = useRuntimeConfig().public.apiUrl
-const { data: discussions } = await useAsyncData("discussions", () =>
-  Discussion.all()
-)
-console.log(discussions.value)
+const props = defineProps<{ discussions: Discussion[] }>()
+console.log(props.discussions)
 </script>
 <template>
   <div

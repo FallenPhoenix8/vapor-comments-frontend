@@ -11,11 +11,13 @@ const props = withDefaults(
     checker?:
       | ((_: string) => Promise<RegisterFieldCorrectStatus | null>)
       | ((_: string) => RegisterFieldCorrectStatus | null)
+    check?: boolean
   }>(),
   {
     type: "text",
     isRegister: false,
     noLabel: false,
+    check: false,
   }
 )
 
@@ -45,8 +47,10 @@ const computedType = computed(() => {
       <div
         class="text-input flex"
         :class="{
-          valid: isRegister && fieldCorrectStatus?.isCorrect === true,
-          invalid: isRegister && fieldCorrectStatus?.isCorrect === false,
+          valid:
+            (check || isRegister) && fieldCorrectStatus?.isCorrect === true,
+          invalid:
+            (check || isRegister) && fieldCorrectStatus?.isCorrect === false,
         }"
       >
         <input
@@ -81,20 +85,22 @@ const computedType = computed(() => {
       </div>
       <div class="status" v-if="props.checker">
         <Icon
-          v-if="isRegister && fieldCorrectStatus?.isCorrect === true"
+          v-if="(check || isRegister) && fieldCorrectStatus?.isCorrect === true"
           name="material-symbols:check"
           class="inline text-success status"
           mode="svg"
         />
         <Icon
-          v-if="isRegister && fieldCorrectStatus?.isCorrect === false"
+          v-if="
+            (check || isRegister) && fieldCorrectStatus?.isCorrect === false
+          "
           name="material-symbols:close"
           class="inline text-error status"
           mode="svg"
         />
       </div>
     </div>
-    <ul v-if="isRegister && fieldCorrectStatus?.isCorrect === false">
+    <ul v-if="(check || isRegister) && fieldCorrectStatus?.isCorrect === false">
       <li
         v-for="reason in fieldCorrectStatus?.reasons"
         :key="reason"

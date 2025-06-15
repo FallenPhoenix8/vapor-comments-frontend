@@ -57,3 +57,11 @@
     }
   }
 }
+
+.popup-wrapper {
+  @apply fixed top-0 left-0 w-full h-full flex justify-center items-center bg-secondary-darker/50 z-40 backdrop-blur-sm;
+
+  & .popup {
+    @apply bg-secondary-darker rounded-base shadow-md shadow-secondary-darker max-w-md p-5 z-50;
+  }
+}
