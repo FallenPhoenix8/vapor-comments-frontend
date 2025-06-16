@@ -41,14 +41,7 @@ watch(discussion, () => {
 })
 </script>
 <template>
-  <main
-    v-if="
-      discussion.details &&
-      discussion.details.comments &&
-      discussion.details.comments.length > 0
-    "
-    class="wrapper px-2 my-2"
-  >
+  <main class="wrapper px-2 my-2">
     <AppDiscussionControls
       :discussionId="discussionId"
       class="my-2"
@@ -58,14 +51,18 @@ watch(discussion, () => {
         )
       "
     />
-    <AppCommentList :comments="discussion.details.comments" />
+    <AppCommentList :comments="discussion?.details?.comments || []" />
+    <main
+      v-if="discussion.details?.comments?.length === 0"
+      class="wrapper flex justify-center items-center px-10"
+    >
+      <h4>
+        There is nothing to see here...<br />
+        Be the first one to comment something!
+      </h4>
+    </main>
   </main>
-  <main v-else class="wrapper flex justify-center items-center px-10">
-    <h4>
-      There is nothing to see here...<br />
-      Be the first one to comment something!
-    </h4>
-  </main>
+
   <AppCommentInputArea class="mx-2 mt-12" @update:comments="addComment" />
 </template>
 <style scoped>
