@@ -1,6 +1,26 @@
-# Nuxt Minimal Starter
+# Description
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This Nuxt.js frontend application is a simple discussion board where users can create discussions, add comments, and participate. Real-time data ensures immediate visibility of user contributions.
+
+The application uses Nuxt.js for server-side rendering and the Vue.js ecosystem. Pages are built with Vue components, and the Nuxt.js built-in support for server-side rendering.
+
+# Technologies used
+
+- **Nuxt.js**: a Vue.js framework for server-side rendering and static site generation
+- **Pinia**: a state management library for Vue.js
+- **WebSockets**: for real-time communication between the client and the server
+- **Motion.js**: a JavaScript library for creating animations and gestures
+
+# Getting started
+
+## Required environmental variables
+
+The following environmental variables are required:
+
+- `DATABASE_URL` - a PostgreSQL connection string
+- `SECRET_KEY` - a secret key for signing JWT tokens
+
+Example data and required format is provided in [.env.example](./.env.example)
 
 ## Setup
 
