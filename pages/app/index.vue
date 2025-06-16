@@ -35,6 +35,7 @@ async function deleteDiscussion() {
     >Are you sure you want to delete this discussion?</AppPopupConfirmDanger
   >
 
+  <AppProfileCard />
   <AppDiscussionList
     v-if="discussions"
     :discussions="discussions"

@@ -121,10 +121,10 @@ export default async (
     }, delay)
   }
 
-  const startHeartbeat = () => {
+  const startHeartbeat = async () => {
     if (heartbeatTimer) return
 
-    heartbeatTimer = setInterval(async () => {
+    async function heartbeat() {
       console.log("Sending heartbeat...")
       let participant = await Participant.getParticipantByUserId(
         discussionId,
@@ -134,6 +134,11 @@ export default async (
         type: "heartbeat",
         participantId: participant.id,
       })
+    }
+
+    await heartbeat()
+    heartbeatTimer = setInterval(async () => {
+      await heartbeat()
     }, heartbeatTimeout)
   }
 

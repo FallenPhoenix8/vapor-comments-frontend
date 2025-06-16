@@ -51,12 +51,15 @@ watch(discussion, () => {
         )
       "
     />
-    <AppCommentList :comments="discussion?.details?.comments || []" />
+    <AppCommentList
+      :comments="discussion?.details?.comments || []"
+      :key="JSON.stringify(comments)"
+    />
     <main
       v-if="discussion.details?.comments?.length === 0"
       class="wrapper flex justify-center items-center px-10"
     >
-      <h4>
+      <h4 class="text-muted">
         There is nothing to see here...<br />
         Be the first one to comment something!
       </h4>

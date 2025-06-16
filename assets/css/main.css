@@ -11,7 +11,7 @@
   --color-primary-lighter: var(--color-amber-500);
   --color-primary-darker: var(--color-amber-800);
 
-  --color-muted: var(--color-gray-500);
+  --color-muted: var(--color-gray-600);
 
   --color-success: var(--color-green-400);
   --color-error: var(--color-red-500);

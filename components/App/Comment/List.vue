@@ -20,6 +20,20 @@ function scrollToBottom() {
 onMounted(() => {
   scrollToBottom()
 })
+
+watch(
+  () => props.comments.length,
+  () => {
+    if (list.value) {
+      const isAlreadyAtBottom =
+        list.value.scrollTop + list.value.offsetHeight >=
+        list.value.scrollHeight
+      if (!isAlreadyAtBottom) return
+    }
+    console.log("Comments updated: ", props.comments)
+    setTimeout(() => scrollToBottom(), 100)
+  }
+)
 </script>
 
 <template>

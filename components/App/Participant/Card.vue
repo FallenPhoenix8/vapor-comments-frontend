@@ -127,16 +127,27 @@ const timeSinceLastActive = computed(() =>
             }"
             mode="css"
           />
-          <span v-if="isActive">Online</span>
+          <span v-if="isActive || isParticipantYourself">Online</span>
           <span v-else>Offline</span>
-          <span v-if="lastActive && timeSinceLastActive">
+          <span
+            v-if="
+              lastActive &&
+              timeSinceLastActive &&
+              !isActive &&
+              !isParticipantYourself
+            "
+          >
             - {{ timeSinceLastActive.formatted }}</span
           >
         </h4>
       </div>
 
       <div v-if="isParticipantYourself" class="flex gap-2">
-        <Button @click="emit('leave-discussion')">Leave</Button>
+        <Button
+          @click="emit('leave-discussion')"
+          v-if="!props.participant.isAuthor"
+          >Leave</Button
+        >
       </div>
     </div>
   </div>

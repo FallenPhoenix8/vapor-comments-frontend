@@ -7,25 +7,31 @@ const props = defineProps<{
 
 const emit = defineEmits(["leave"])
 
-async function leaveDiscussion(discussionId: string) {
-  const userId = useUser().user?.id
-  if (!userId) {
-    console.error("User is not logged in")
-    return
-  }
-
-  const participant = await Participant.getParticipantByUserId(
-    discussionId,
-    userId
+const participant = ref<Participant | null>(null)
+async function getYourParticipant() {
+  participant.value = await Participant.getParticipantByUserId(
+    props.discussionId,
+    useUser().user?.id as string
   )
+  console.log(participant.value)
+}
 
+onMounted(async () => {
+  getYourParticipant()
+})
+
+watch(useUser(), async () => {
+  getYourParticipant()
+})
+
+async function leaveDiscussion() {
   if (!participant) {
     console.error("Participant not found")
     return
   }
 
-  await participant.deleteAllComments()
-  await participant.leaveDiscussion()
+  await participant.value?.deleteAllComments()
+  await participant.value?.leaveDiscussion()
 
   emit("leave")
 
@@ -39,7 +45,8 @@ async function leaveDiscussion(discussionId: string) {
   >
     <ButtonIcon
       name="pepicons-pop:leave"
-      @click="leaveDiscussion(props.discussionId)"
+      @click="leaveDiscussion()"
+      v-if="participant && !participant.isAuthor"
     />
     <NuxtLink :to="`/app/discussions/${props.discussionId}/participants`">
       <ButtonIcon name="fluent:people-12-filled" />
