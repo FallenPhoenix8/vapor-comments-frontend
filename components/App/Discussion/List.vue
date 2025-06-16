@@ -2,6 +2,7 @@
 import Discussion from "~/class/Discussion"
 const props = defineProps<{ discussions: Discussion[] }>()
 console.log(props.discussions)
+const emit = defineEmits(["show:delete-discussion"])
 </script>
 <template>
   <div
@@ -12,6 +13,7 @@ console.log(props.discussions)
       v-for="discussion in discussions"
       :discussion="discussion"
       :key="discussion.id"
+      @show:delete-discussion="emit('show:delete-discussion', $event as string)"
     />
   </div>
 </template>

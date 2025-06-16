@@ -87,4 +87,42 @@ export default class Discussion {
       throw new Error("Failed to check if title is taken: " + error)
     }
   }
+
+  static async deleteAllParticipants(discussionId: string) {
+    try {
+      const res = await axios.delete(
+        `${User.apiUrl}/api/discussions/${discussionId}/participants/delete`,
+        {
+          withCredentials: true,
+        }
+      )
+      if (!(res.status === 200 || res.status === 201)) {
+        console.error(res.statusText)
+        throw new Error("Failed to delete participants: " + res.statusText)
+      }
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to delete participants: " + error)
+    }
+  }
+
+  static async delete(discussionId: string) {
+    try {
+      await Discussion.deleteAllParticipants(discussionId)
+      const res = await axios.delete(
+        `${User.apiUrl}/api/discussions/${discussionId}/delete`,
+        {
+          withCredentials: true,
+        }
+      )
+      if (!(res.status === 200 || res.status === 201)) {
+        console.error(res.statusText)
+        throw new Error("Failed to delete discussion: " + res.statusText)
+      }
+      return Discussion.all()
+    } catch (error) {
+      console.error(error)
+      throw new Error("Failed to delete discussion: " + error)
+    }
+  }
 }

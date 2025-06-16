@@ -4,11 +4,13 @@ const props = withDefaults(
     onClick?: (payload: MouseEvent) => void
     isLoading?: boolean
     disabled?: boolean
+    variant?: "primary" | "danger"
   }>(),
   {
     onClick: () => {},
     isLoading: false,
     disabled: false,
+    variant: "primary",
   }
 )
 
@@ -26,7 +28,7 @@ function setActiveFalse() {
 <template>
   <button
     class="btn"
-    :class="{ active: isActive }"
+    :class="`${props.variant} ${isActive ? 'active' : ''}`"
     @mouseenter="setActiveTrue"
     @mouseleave="setActiveFalse"
     @focusin="setActiveTrue"

@@ -16,6 +16,10 @@
   --color-success: var(--color-green-400);
   --color-error: var(--color-red-500);
 
+  --color-danger-lighter: var(--color-red-300);
+  --color-danger: var(--color-red-700);
+  --color-danger-darker: var(--color-red-800);
+
   --color-bg-color: var(--color-slate-900);
   --color-text: var(--color-white);
 
@@ -87,12 +91,11 @@
   }
 
   .btn {
-    @apply bg-primary rounded-base px-3 py-2 transition-all duration-300;
+    @apply rounded-base px-3 py-2 transition-all duration-300;
     box-shadow: 0.25rem 0.25rem 0 0 var(--color-primary-darker);
 
     &.active {
-      @apply bg-primary-lighter translate-1 cursor-pointer;
-      box-shadow: 0 0 0 0 var(--color-primary-lighter);
+      @apply translate-1 cursor-pointer;
     }
 
     &:focus {
@@ -101,10 +104,35 @@
 
     &:disabled {
       @apply opacity-50 cursor-not-allowed;
+    }
+
+    &.primary {
+      @apply bg-primary;
+      box-shadow: 0.25rem 0.25rem 0 0 var(--color-primary-darker);
+
+      &.active {
+        @apply bg-primary-lighter;
+        box-shadow: 0 0 0 0 var(--color-primary-lighter);
+      }
 
       &:hover,
       &:focus {
         @apply bg-primary;
+      }
+    }
+
+    &.danger {
+      @apply bg-danger;
+      box-shadow: 0.25rem 0.25rem 0 0 var(--color-danger-darker);
+
+      &.active {
+        @apply bg-danger-darker;
+        box-shadow: 0 0 0 0 var(--color-danger-darkbg-danger-darker);
+      }
+
+      &:hover,
+      &:focus {
+        @apply bg-danger;
       }
     }
   }

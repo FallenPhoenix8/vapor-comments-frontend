@@ -10,6 +10,17 @@ const { data: discussions } = await useAsyncData("discussions", () =>
 )
 
 const isShowCreateDiscussionPopup = ref(false)
+const deleteDiscussionPopup = reactive({
+  isShow: false,
+  discussionIdToDelete: "",
+})
+
+async function deleteDiscussion() {
+  discussions.value = await Discussion.delete(
+    deleteDiscussionPopup.discussionIdToDelete
+  )
+  deleteDiscussionPopup.isShow = false
+}
 </script>
 <template>
   <AppPopupCreateDiscussion
@@ -17,7 +28,22 @@ const isShowCreateDiscussionPopup = ref(false)
     @close="isShowCreateDiscussionPopup = false"
     @update:discussions="discussions = $event"
   />
-  <AppDiscussionList v-if="discussions" :discussions="discussions" />
+  <AppPopupConfirmDanger
+    :show="deleteDiscussionPopup.isShow"
+    @close="deleteDiscussionPopup.isShow = false"
+    @confirm="deleteDiscussion()"
+    >Are you sure you want to delete this discussion?</AppPopupConfirmDanger
+  >
+
+  <AppDiscussionList
+    v-if="discussions"
+    :discussions="discussions"
+    @show:delete-discussion="(event) => {
+      deleteDiscussionPopup.discussionIdToDelete = event as string
+      deleteDiscussionPopup.isShow = true
+    }
+    "
+  />
   <div class="flex justify-center items-center my-4">
     <Button @click="isShowCreateDiscussionPopup = true"
       >Create discussion</Button
