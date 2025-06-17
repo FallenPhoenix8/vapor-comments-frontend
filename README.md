@@ -17,8 +17,8 @@ The application uses Nuxt.js for server-side rendering and the Vue.js ecosystem.
 
 The following environmental variables are required:
 
-- `DATABASE_URL` - a PostgreSQL connection string
-- `SECRET_KEY` - a secret key for signing JWT tokens
+- `API_URL`: the URL of the API server
+- `CONTACT_EMAIL`: the contact email for the application host
 
 Example data and required format is provided in [.env.example](./.env.example)
 
