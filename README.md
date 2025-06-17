@@ -18,6 +18,7 @@ The application uses Nuxt.js for server-side rendering and the Vue.js ecosystem.
 The following environmental variables are required:
 
 - `API_URL`: the URL of the API server
+- `VITE_API_URL`: Should be the same as `API_URL`, it'll be exposed to frontend
 - `CONTACT_EMAIL`: the contact email for the application host
 
 Example data and required format is provided in [.env.example](./.env.example)
