@@ -10,6 +10,8 @@ const apiUrl = useRuntimeConfig().public.apiUrl
 
 const isLoading = ref<boolean>(false)
 
+const error = ref<string | null>(useRoute().query.error?.toString() || null)
+
 function checkUsername(username: string): boolean {
   if (!username.trim()) {
     return false
@@ -58,6 +60,7 @@ async function handleSubmit(event: Event) {
   } catch (error) {
     console.error(error)
     isLoading.value = false
+    navigateTo(useRoute().path + "?error=" + error)
   }
 }
 
@@ -69,6 +72,9 @@ const isFilledCorrectly = computed(() => {
 })
 </script>
 <template>
+  <AppPopupAlert @close="error = null" :show="!!error">
+    Error logging in: {{ error }}
+  </AppPopupAlert>
   <form
     :action="`${apiUrl}/api/auth/login`"
     class="auth-form"

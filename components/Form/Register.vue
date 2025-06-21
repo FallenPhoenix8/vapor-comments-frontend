@@ -203,6 +203,9 @@ watch(
 )
 </script>
 <template>
+  <AppPopupAlert @close="error = null" :show="!!error">
+    Error registering user: {{ error }}
+  </AppPopupAlert>
   <form
     :action="`${apiUrl}/api/auth/register`"
     class="auth-form"
